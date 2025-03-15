@@ -7,15 +7,14 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class Education {
+public class JobInUniversity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private int year;
-    private String university;
-    private String specialization;
+    private String date;
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "lecturer_id")

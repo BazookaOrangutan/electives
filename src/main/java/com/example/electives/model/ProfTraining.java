@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class Education {
+public class ProfTraining {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

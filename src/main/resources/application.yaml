@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: electives
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
