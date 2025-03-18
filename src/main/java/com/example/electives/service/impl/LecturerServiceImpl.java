@@ -2,7 +2,7 @@ package com.example.electives.service.impl;
 
 import com.example.electives.exception.LecturerNotFoundException;
 import com.example.electives.model.Lecturer;
-import com.example.electives.repository.LecturerRepository;
+import com.example.electives.repository.*;
 import com.example.electives.service.LecturerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,27 @@ import java.util.UUID;
 public class LecturerServiceImpl implements LecturerService {
 
     private final LecturerRepository lecturerRepository;
+
+    private final DisciplineRepository disciplineRepository;
+    private final EducationRepository educationRepository;
+    private final JobInUniversityRepository jobInUniversityRepository;
+    private final JobTitleRepository jobTitleRepository;
+    private final ProfExperienceRepository profExperienceRepository;
+    private final ProfTrainingRepository profTrainingRepository;
+    private final ScienceInterestRepository scienceInterestRepository;
+    private final ScientificWorkRepository scientificWorkRepository;
+
+    private void deleteOldInformationForLecturer(UUID lecturerId) {
+
+        disciplineRepository.deleteAllByLecturerId(lecturerId);
+        educationRepository.deleteAllByLecturerId(lecturerId);
+        jobInUniversityRepository.deleteAllByLecturerId(lecturerId);
+        jobTitleRepository.deleteAllByLecturerId(lecturerId);
+        profExperienceRepository.deleteAllByLecturerId(lecturerId);
+        profTrainingRepository.deleteAllByLecturerId(lecturerId);
+        scienceInterestRepository.deleteAllByLecturerId(lecturerId);
+        scientificWorkRepository.deleteAllByLecturerId(lecturerId);
+    }
 
     @Override
     public Lecturer createLecturer(Lecturer lecturer) {
@@ -40,6 +61,8 @@ public class LecturerServiceImpl implements LecturerService {
         if(!lecturerRepository.existsById(id)) {
             throw new LecturerNotFoundException(id);
         }
+
+        deleteOldInformationForLecturer(id);
 
         lecturer.setId(id);
 

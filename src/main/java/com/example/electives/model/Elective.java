@@ -20,7 +20,7 @@ public class Elective {
     private String format;
     private String intensity;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private Lecturer author;
 }

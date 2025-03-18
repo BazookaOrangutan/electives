@@ -1,6 +1,11 @@
 spring:
   application:
     name: electives
+  datasource:
+    url: ${ELECTIVES_DB_URL:jdbc:postgresql://localhost:5432/elective}
+    username: ${ELECTIVES_DB_USERNAME:postgres}
+    password: ${ELECTIVES_DB_PASSWORD:7878}
   jpa:
     hibernate:
       ddl-auto: create-drop
+    show-sql: true

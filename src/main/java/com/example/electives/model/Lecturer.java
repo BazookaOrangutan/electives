@@ -1,7 +1,10 @@
 package com.example.electives.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +12,9 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lecturer {
 
     @Id
@@ -19,16 +25,42 @@ public class Lecturer {
 
     private String scientificDegree;
     private String academicTitle;
-    private int experience;
-    private int specialtyExperience;
+    private Integer experience;
+    private Integer specialtyExperience;
     private String email;
     private String phone;
     private String address;
 
-    @ManyToMany
-    @JoinTable(name="lecturer-science_interest",
-            joinColumns =  @JoinColumn(name="lecturer_id", referencedColumnName = "id"),
-            inverseJoinColumns =@JoinColumn(name="science_interest_id", referencedColumnName="id")
-    )
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<Discipline> disciplines =  new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<Education> educations =  new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<JobInUniversity> jobsInUniversity = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<JobTitle> jobTitles = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<ProfExperience> profExperience = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<ProfTraining> profTrainings = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
     private List<ScienceInterest> scienceInterests = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "lecturer_id")
+    private List<ScientificWork> scientificWorks = new ArrayList<>();
+
 }
