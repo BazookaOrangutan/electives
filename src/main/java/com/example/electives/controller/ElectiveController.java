@@ -26,4 +26,7 @@ public interface ElectiveController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteElective(@PathVariable UUID id);
+
+    @GetMapping("search")
+    List<ElectiveResponse> searchElective(@RequestParam String author, @RequestParam String elective);
 }

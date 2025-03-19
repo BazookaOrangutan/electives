@@ -87,4 +87,14 @@ public class ElectiveControllerImpl implements ElectiveController {
     public void deleteElective(UUID id) {
         electiveService.deleteElective(id);
     }
+
+    @Override
+    public List<ElectiveResponse> searchElective(String author, String elective) {
+        return electiveService.getAllElectivesByAuthorAndName(author, elective)
+                .stream().map(el -> {
+                    LecturerResponse lecturerResponse = lecturerMapper.toResponse(el.getAuthor());
+                    ElectiveResponse electiveResponse = electiveMapper.toResponse(el);
+                    electiveResponse.setLecturer(lecturerResponse);
+                    return electiveResponse;}).toList();
+    }
 }

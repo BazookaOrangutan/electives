@@ -50,4 +50,9 @@ public class ElectiveServiceImpl implements ElectiveService {
     public void deleteElective(UUID id) {
         electiveRepository.deleteById(id);
     }
+
+    @Override
+    public List<Elective> getAllElectivesByAuthorAndName(String author, String name) {
+        return electiveRepository.findByTitleAndAuthorName(author, name);
+    }
 }

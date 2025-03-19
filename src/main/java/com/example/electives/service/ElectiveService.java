@@ -16,4 +16,6 @@ public interface ElectiveService {
     Elective updateElective(UUID id, Elective elective);
 
     void deleteElective(UUID id);
+
+    List<Elective> getAllElectivesByAuthorAndName(String author, String name);
 }
