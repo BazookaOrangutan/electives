@@ -12,6 +12,7 @@ public class LecturerResponse {
 
     private UUID id;
     private String name;
+    private String photo;
     private String scientificDegree;
     private String academicTitle;
     private Integer experience;

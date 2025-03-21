@@ -1,6 +1,7 @@
 package com.example.electives.controller;
 
 import com.example.electives.dto.request.ElectiveRequest;
+import com.example.electives.dto.request.LecturerRequest;
 import com.example.electives.model.Lecturer;
 import com.example.electives.service.ElectiveService;
 import com.example.electives.service.LecturerService;
@@ -37,7 +38,7 @@ public class AdminPanelController {
     }
 
     @GetMapping("/electives/new")
-    public String showCreateForm(Model model) {
+    public String showElectiveCreateForm(Model model) {
         // Передаем пустой объект ElectiveRequest в форму
         model.addAttribute("electiveRequest", new ElectiveRequest());
 
@@ -45,9 +46,12 @@ public class AdminPanelController {
         List<Lecturer> lecturers = lecturerService.getAllLecturers();
         model.addAttribute("lecturers", lecturers);
 
-        model.addAttribute("controller", electiveController);
-
         return "admin/add-elective"; // Имя шаблона
+    }
+
+    @GetMapping("/lecturer/new")
+    public String showLecturerCreateForm(Model model) {
+        return "admin/add-lecturer"; // Имя шаблона
     }
 
 }

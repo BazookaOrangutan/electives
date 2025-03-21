@@ -22,6 +22,7 @@ public class Lecturer {
     private UUID id;
 
     private String name;
+    private String photo;
 
     private String scientificDegree;
     private String academicTitle;

@@ -8,6 +8,7 @@ import java.util.List;
 public class LecturerRequest {
 
     private String name;
+    private String photo;
     private String scientificDegree;
     private String academicTitle;
     private Integer experience;

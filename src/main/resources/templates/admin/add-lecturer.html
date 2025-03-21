@@ -1,11 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Lecturer</title>
+    <!-- Подключение Bootstrap для стилизации (опционально) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container mt-5">
+    <h1>Добавить автора</h1>
+    <form id="lecturerForm">
+        <!-- Основные поля -->
+        <div class="mb-3">
+            <label for="name" class="form-label">ФИО</label>
+            <input type="text" class="form-control" id="name" required>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="file" class="form-control" id="photo" accept="image/*" onchange="handlePhotoUpload(event)">
+        </div>
+
+        <input type="hidden" id="photoBase64" name="photoBase64">
+
+        <div class="mb-3">
+            <label for="scientificDegree" class="form-label">Ученая степень</label>
+            <input type="text" class="form-control" id="scientificDegree" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="academicTitle" class="form-label">Academic Title</label>
+            <input type="text" class="form-control" id="academicTitle" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="experience" class="form-label">Опыт</label>
+            <input type="number" class="form-control" id="experience" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="specialtyExperience" class="form-label">Опыт по специальности</label>
+            <input type="number" class="form-control" id="specialtyExperience" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Телефон</label>
+            <input type="text" class="form-control" id="phone" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Рабочий адрес</label>
+            <input type="text" class="form-control" id="address" required>
+        </div>
+
+        <!-- Динамические поля для списков -->
+        <div class="mb-3">
+            <label class="form-label">Образования</label>
+            <div id="educationsContainer">
+                <div class="education mb-2">
+                    <input type="text" class="form-control" name="educations" placeholder="Education">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('educationsContainer', 'educations')">+ Add Education</button>
+        </div>
+
+        <!-- Аналогичные блоки для других списков -->
+        <!-- jobTitles -->
+        <div class="mb-3">
+            <label class="form-label">Должности</label>
+            <div id="jobTitlesContainer">
+                <div class="jobTitle mb-2">
+                    <input type="text" class="form-control" name="jobTitles" placeholder="Job Title">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('jobTitlesContainer', 'jobTitles')">+ Add Job Title</button>
+        </div>
+
+        <!-- jobsInUniversity -->
+        <div class="mb-3">
+            <label class="form-label">Работа в университете</label>
+            <div id="jobsInUniversityContainer">
+                <div class="jobInUniversity mb-2">
+                    <input type="text" class="form-control" name="jobsInUniversity" placeholder="Job in University">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('jobsInUniversityContainer', 'jobsInUniversity')">+ Add Job in University</button>
+        </div>
+
+        <!-- disciplines -->
+        <div class="mb-3">
+            <label class="form-label">Дисциплины</label>
+            <div id="disciplinesContainer">
+                <div class="discipline mb-2">
+                    <input type="text" class="form-control" name="disciplines" placeholder="Discipline">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('disciplinesContainer', 'disciplines')">+ Add Discipline</button>
+        </div>
+
+        <!-- profTrainings -->
+        <div class="mb-3">
+            <label class="form-label">Professional Trainings</label>
+            <div id="profTrainingsContainer">
+                <div class="profTraining mb-2">
+                    <input type="text" class="form-control" name="profTrainings" placeholder="Professional Training">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('profTrainingsContainer', 'profTrainings')">+ Add Professional Training</button>
+        </div>
+
+        <!-- scienceInterests -->
+        <div class="mb-3">
+            <label class="form-label">Science Interests</label>
+            <div id="scienceInterestsContainer">
+                <div class="scienceInterest mb-2">
+                    <input type="text" class="form-control" name="scienceInterests" placeholder="Science Interest">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('scienceInterestsContainer', 'scienceInterests')">+ Add Science Interest</button>
+        </div>
+
+        <!-- profExperience -->
+        <div class="mb-3">
+            <label class="form-label">Профессиональный опыт</label>
+            <div id="profExperienceContainer">
+                <div class="profExperience mb-2">
+                    <input type="text" class="form-control" name="profExperience" placeholder="Professional Experience">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('profExperienceContainer', 'profExperience')">+ Add Professional Experience</button>
+        </div>
+
+        <!-- scientificWorks -->
+        <div class="mb-3">
+            <label class="form-label">Научные работы</label>
+            <div id="scientificWorksContainer">
+                <div class="scientificWork mb-2">
+                    <input type="text" class="form-control" name="scientificWorks" placeholder="Scientific Work">
+                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-sm" onclick="addField('scientificWorksContainer', 'scientificWorks')">+ Add Scientific Work</button>
+        </div>
+
+        <!-- Кнопка отправки формы -->
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Добавить</button>
+    </form>
+</div>
+
+<!-- Подключение JavaScript -->
+<script>
+    // Функция для добавления нового поля
+    function addField(containerId, fieldName) {
+        const container = document.getElementById(containerId);
+        const newField = document.createElement('div');
+        newField.classList.add('mb-2');
+        newField.innerHTML = `
+                <input type="text" class="form-control" name="${fieldName}" placeholder="${fieldName.replace(/([A-Z])/g, ' $1').trim()}">
+                <button type="button" class="btn btn-danger btn-sm mt-2" onclick="removeField(this)">-</button>
+            `;
+        container.appendChild(newField);
+    }
+
+    // Функция для удаления поля
+    function removeField(button) {
+        button.parentElement.remove();
+    }
+
+    function handlePhotoUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const base64 = e.target.result.split(',')[1]; // Убираем префикс "data:image/*;base64,"
+                document.getElementById('photoBase64').value = base64;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function submitForm() {
+        const formData = {
+            name: document.getElementById('name').value,
+            scientificDegree: document.getElementById('scientificDegree').value,
+            academicTitle: document.getElementById('academicTitle').value,
+            experience: parseInt(document.getElementById('experience').value),
+            specialtyExperience: parseInt(document.getElementById('specialtyExperience').value),
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            educations: Array.from(document.querySelectorAll('input[name="educations"]')).map(input => input.value),
+            jobTitles: Array.from(document.querySelectorAll('input[name="jobTitles"]')).map(input => input.value),
+            jobsInUniversity: Array.from(document.querySelectorAll('input[name="jobsInUniversity"]')).map(input => input.value),
+            disciplines: Array.from(document.querySelectorAll('input[name="disciplines"]')).map(input => input.value),
+            profTrainings: Array.from(document.querySelectorAll('input[name="profTrainings"]')).map(input => input.value),
+            scienceInterests: Array.from(document.querySelectorAll('input[name="scienceInterests"]')).map(input => input.value),
+            profExperience: Array.from(document.querySelectorAll('input[name="profExperience"]')).map(input => input.value),
+            scientificWorks: Array.from(document.querySelectorAll('input[name="scientificWorks"]')).map(input => input.value),
+            photoBase64: document.getElementById('photoBase64').value, // Фото в Base64
+        };
+
+        // Отправляем данные на сервер
+        fetch('/api/v1/lecturers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Lecturer created successfully');
+                    window.location.href = 'admin/lecturers'; // Перенаправление после успешного создания
+                } else {
+                    alert('Error creating lecturer');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
 </body>
 </html>
