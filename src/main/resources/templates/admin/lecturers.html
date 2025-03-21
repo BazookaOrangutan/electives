@@ -2,36 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Electives</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div style="display: flex"><h1><u>Преподаватели</u></h1> <a href="/admin/lecturers"><span>Преподаватели</span></a> </div>
+<div style="display: flex"><h1>Преподаватели</h1> <a href="/admin/electives"><span>Элективы</span></a></div>
 
 <a href="/admin/lecturer/new">Добавить преподавателя</a>
 <table>
     <tr>
         <th>ID</th>
         <th>Имя</th>
-        <th>Описание</th>
-        <th>Место</th>
-        <th>Формат</th>
-        <th>Контроль</th>
-        <th>Интенсивность</th>
-        <th>Автор</th>
     </tr>
-    <tr th:each="elective : ${electives}">
-        <td th:text="${elective.id}"></td>
-        <td th:text="${elective.title}"></td>
-        <td th:text="${elective.description}"></td>
-        <td th:text="${elective.place}"></td>
-        <td th:text="${elective.format}"></td>
-        <td th:text="${elective.controlType}"></td>
-        <td th:text="${elective.intensity}"></td>
-        <td th:text="${elective.getAuthor().getName()}"></td>
+    <tr th:each="lecturer : ${lecturers}">
+        <td th:text="${lecturer.id}"></td>
+        <td th:text="${lecturer.name}"></td>
         <td>
-            <a th:href="@{/admin/electives/edit/{id}(id=${elective.id})}">Edit</a>
-            <a th:href="@{/admin/electives/delete/{id}(id=${elective.id})}">Delete</a>
+            <a th:href="@{/admin/lecturers/edit/{id}(id=${lecturer.id})}">Edit</a>
+            <a th:href="@{/admin/lecturers/delete/{id}(id=${lecturer.id})}">Delete</a>
         </td>
     </tr>
 </table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/**").hasRole("USER")
+                        .requestMatchers("/api/**").hasRole("ADMIN")
                         .anyRequest().hasRole("ADMIN")
                 )
                 .formLogin(form -> form
