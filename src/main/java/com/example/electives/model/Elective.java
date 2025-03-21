@@ -14,6 +14,8 @@ public class Elective {
     private UUID id;
 
     private String title;
+
+    @Column(length = 3000)
     private String description;
     private String place;
     private String controlType;
@@ -24,3 +26,4 @@ public class Elective {
     @JoinColumn(name = "author_id")
     private Lecturer author;
 }
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Electives</title>
+</head>
+<body>
+<div style="display: flex"><h1><u>Элективы</u></h1> <a href="/admin/lecturers"><span>Преподаватели</span></a> </div>
+
+<a href="/admin/electives/new">Добавить электив</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Место</th>
+        <th>Формат</th>
+        <th>Контроль</th>
+        <th>Интенсивность</th>
+        <th>Автор</th>
+    </tr>
+    <tr th:each="elective : ${electives}">
+        <td th:text="${elective.id}"></td>
+        <td th:text="${elective.title}"></td>
+        <td th:text="${elective.description}"></td>
+        <td th:text="${elective.place}"></td>
+        <td th:text="${elective.format}"></td>
+        <td th:text="${elective.controlType}"></td>
+        <td th:text="${elective.intensity}"></td>
+        <td th:text="${elective.getAuthor().getName()}"></td>
+        <td>
+            <a th:href="@{/admin/electives/edit/{id}(id=${elective.id})}">Edit</a>
+            <a th:href="@{/admin/electives/delete/{id}(id=${elective.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

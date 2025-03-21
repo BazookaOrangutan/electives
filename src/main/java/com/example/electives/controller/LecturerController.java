@@ -3,6 +3,7 @@ package com.example.electives.controller;
 import com.example.electives.dto.request.LecturerRequest;
 import com.example.electives.dto.response.LecturerResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
