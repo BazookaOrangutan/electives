@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Elective</title>
+    <title>Добавить электив</title>
     <!-- Подключение Bootstrap для стилизации (опционально) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -51,13 +51,13 @@
         <div class="mb-3">
             <label for="authorId" class="form-label">Автор курса</label>
             <select class="form-control" id="authorId" th:field="*{authorId}" required>
-                <option value="">Select a lecturer</option>
+                <option value="">Выберите преподавателя</option>
                 <option th:each="lecturer : ${lecturers}" th:value="${lecturer.id}" th:text="${lecturer.name}"></option>
             </select>
         </div>
 
         <!-- Кнопка отправки формы -->
-        <button type="button" class="btn btn-primary" onclick="submitForm()">Создать</button>
+        <button style="margin: 20px 0" type="button" class="btn btn-primary" onclick="submitForm()">Создать</button>
     </form>
 </div>
 

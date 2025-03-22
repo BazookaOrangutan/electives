@@ -4,6 +4,7 @@ import com.example.electives.exception.LecturerNotFoundException;
 import com.example.electives.model.Lecturer;
 import com.example.electives.repository.*;
 import com.example.electives.service.LecturerService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class LecturerServiceImpl implements LecturerService {
     private final ProfTrainingRepository profTrainingRepository;
     private final ScienceInterestRepository scienceInterestRepository;
     private final ScientificWorkRepository scientificWorkRepository;
+
+    private final ElectiveRepository electiveRepository;
 
     private void deleteOldInformationForLecturer(UUID lecturerId) {
 
@@ -71,6 +74,21 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public void deleteLecturer(UUID id) {
+        lecturerRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean hasElectives(UUID id) {
+        return electiveRepository.existsByAuthorId(id);
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteLecturerWithElectives(UUID id) {
+
+        electiveRepository.deleteAllByAuthorId(id);
+
         lecturerRepository.deleteById(id);
     }
 }

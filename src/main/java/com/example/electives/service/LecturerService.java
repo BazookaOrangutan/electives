@@ -16,4 +16,8 @@ public interface LecturerService {
     Lecturer updateLecturer(UUID id, Lecturer lecturer);
 
     void deleteLecturer(UUID id);
+
+    boolean hasElectives(UUID id);
+
+    void deleteLecturerWithElectives(UUID id);
 }

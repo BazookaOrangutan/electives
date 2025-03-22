@@ -18,6 +18,7 @@ public interface LecturerMapper {
         return LecturerResponse.builder()
                 .id(lecturer.getId())
                 .name(lecturer.getName())
+                .photo(lecturer.getPhoto())
                 .scientificDegree(lecturer.getScientificDegree())
                 .academicTitle(lecturer.getAcademicTitle())
                 .experience(lecturer.getExperience())
@@ -40,6 +41,7 @@ public interface LecturerMapper {
 
         return Lecturer.builder()
                 .name(lecturerRequest.getName())
+                .photo(lecturerRequest.getPhoto())
                 .scientificDegree(lecturerRequest.getScientificDegree())
                 .academicTitle(lecturerRequest.getAcademicTitle())
                 .experience(lecturerRequest.getExperience())

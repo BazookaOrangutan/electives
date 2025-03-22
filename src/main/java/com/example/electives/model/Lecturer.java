@@ -1,6 +1,7 @@
 package com.example.electives.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class Lecturer {
     private UUID id;
 
     private String name;
+
+    @Column(length = 999999999)
     private String photo;
 
     private String scientificDegree;
