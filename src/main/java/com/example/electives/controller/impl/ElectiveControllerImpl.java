@@ -32,8 +32,6 @@ public class ElectiveControllerImpl implements ElectiveController {
     @Override
     public ElectiveResponse createElective(ElectiveRequest electiveRequest) {
 
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
         Elective elective = electiveMapper.fromRequest(electiveRequest);
 
         Lecturer lecturer = lecturerService.getLecturerById(electiveRequest.getAuthorId());

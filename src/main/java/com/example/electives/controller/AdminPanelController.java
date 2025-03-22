@@ -104,7 +104,7 @@ public class AdminPanelController {
 
         lecturerService.updateLecturer(id, lecturer);
 
-        return "/admin/lecturers";
+        return "redirect:/admin/lecturers";
     }
 
     @GetMapping("/electives/edit/{id}")

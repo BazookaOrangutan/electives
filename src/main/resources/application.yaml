@@ -14,3 +14,6 @@ logging:
     org:
       springframework:
         security: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
