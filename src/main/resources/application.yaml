@@ -7,13 +7,12 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD:7878}
   jpa:
     hibernate:
-      ddl-auto: create-drop # update для продакшн
+      ddl-auto: validate
     show-sql: true
+  liquibase:
+    enabled: true
 logging:
   level:
     org:
       springframework:
         security: DEBUG
-springdoc:
-  api-docs:
-    enabled: true

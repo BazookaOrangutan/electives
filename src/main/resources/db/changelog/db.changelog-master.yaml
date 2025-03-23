@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-lecturer-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-discipline-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-education-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-elective-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-job-in-university-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-job-title-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-prof-experience-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-prof-training-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-science-interest-table.sql
+  - include:
+      file: db/changelog/changeset/2025/03/22/create-scientific-work.sql

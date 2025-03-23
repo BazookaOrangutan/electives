@@ -28,8 +28,8 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/**").hasRole("ADMIN")
-                        .anyRequest().hasRole("ADMIN")
+                        .requestMatchers("/api/**").hasRole("USER")
+                        .anyRequest().hasRole("USER")
                 )
                 .formLogin(form -> form
                         .loginProcessingUrl("/login")
@@ -46,7 +46,7 @@ public class SecurityConfig {
         UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder().encode("adminPassword")) // Замените на ваш пароль
-                .roles("ADMIN")
+                .roles("ADMIN", "USER")
                 .build();
 
         UserDetails apiUser = User.builder()
