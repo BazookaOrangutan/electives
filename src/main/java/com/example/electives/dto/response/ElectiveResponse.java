@@ -29,6 +29,9 @@ public class ElectiveResponse {
     @Schema(description = "Трудоемкость, ЗЕ", example = "2")
     private String intensity;
 
+    @Schema(description = "Активен на данный момент ли электив", example = "true")
+    private Boolean active;
+
     @Schema(description = "Автор(преподаватель) электива в виде объекта")
     private LecturerResponse lecturer;
 }

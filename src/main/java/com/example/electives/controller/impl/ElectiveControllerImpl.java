@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static com.example.electives.constant.EndpointConstants.URL_ELECTIVES_API;
@@ -50,9 +51,14 @@ public class ElectiveControllerImpl implements ElectiveController {
 
         Elective elective = electiveService.getElective(id);
 
+        System.out.println("Elective: " + elective.getActive());
+
         LecturerResponse lecturerResponse = lecturerMapper.toResponse(elective.getAuthor());
 
         ElectiveResponse electiveResponse = electiveMapper.toResponse(elective);
+
+        System.out.println("Elective Response: " + electiveResponse.getActive());
+
         electiveResponse.setLecturer(lecturerResponse);
 
         return electiveResponse;
@@ -96,5 +102,12 @@ public class ElectiveControllerImpl implements ElectiveController {
                     ElectiveResponse electiveResponse = electiveMapper.toResponse(el);
                     electiveResponse.setLecturer(lecturerResponse);
                     return electiveResponse;}).toList();
+    }
+
+    @Override
+    public void updateElectiveActiveStatus(UUID id, Map<String, Boolean> request) {
+
+        Boolean active = request.get("active");
+        electiveService.updateActiveStatus(id, active);
     }
 }

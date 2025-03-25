@@ -55,4 +55,12 @@ public class ElectiveServiceImpl implements ElectiveService {
     public List<Elective> getAllElectivesByAuthorAndName(String author, String name) {
         return electiveRepository.findByTitleAndAuthorName(author, name);
     }
+
+    @Override
+    public void updateActiveStatus(UUID id, Boolean active) {
+
+        Elective elective = getElective(id);
+        elective.setActive(active);
+        electiveRepository.save(elective);
+    }
 }

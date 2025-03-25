@@ -26,6 +26,9 @@ public class ElectiveRequest {
     @Schema(description = "Трудоемкость, ЗЕ", example = "2")
     private String intensity;
 
+    @Schema(description = "Активен на данный момент ли электив", example = "true")
+    private Boolean active;
+
     @Schema(description = "Уникальный идетификатор автора электива", example = "165abbd4-de3e-47f3-8429-938559e3586a")
     private UUID authorId;
 }

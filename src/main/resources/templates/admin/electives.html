@@ -60,6 +60,7 @@
             <th>Контроль</th>
             <th>Интенсивность</th>
             <th>Автор</th>
+            <th>Активнось</th>
             <th>Действия</th>
         </tr>
         </thead>
@@ -73,6 +74,19 @@
             <td th:text="${elective.controlType}"></td>
             <td th:text="${elective.intensity}"></td>
             <td th:text="${elective.getAuthor().getName()}"></td>
+            <td>
+                <div class="form-check form-switch">
+                    <input class="form-check-input active-toggle"
+                           type="checkbox"
+                           th:checked="${elective.active}"
+                           th:data-id="${elective.id}"
+                           id="activeToggle_${elective.id}">
+                    <label class="form-check-label status-text"
+                           th:for="'activeToggle_' + ${elective.id}"
+                           th:text="${elective.active} ? 'Активен' : 'Неактивен'">
+                    </label>
+                </div>
+            </td>
             <td>
                 <a th:href="@{/admin/electives/edit/{id}(id=${elective.id})}" class="btn btn-sm btn-warning btn-custom">
                     <i class="fas fa-edit"></i> Edit
@@ -98,6 +112,37 @@
         }
         return false;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.active-toggle').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const electiveId = this.getAttribute('data-id');
+                const isActive = this.checked;
+                const label = this.nextElementSibling;
+
+                fetch(`/api/v1/electives/${electiveId}/active`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ active: isActive })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            // Если ошибка, возвращаем чекбокс в предыдущее состояние
+                            this.checked = !isActive;
+                            throw new Error('Ошибка при обновлении статуса');
+                        }
+                        // Обновляем текст статуса
+                        label.textContent = isActive ? 'Активен' : 'Неактивен';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Не удалось обновить статус электива');
+                    });
+            });
+        });
+    });
 </script>
 </body>
 </html>

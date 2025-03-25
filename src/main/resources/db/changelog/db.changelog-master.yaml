@@ -19,3 +19,5 @@ databaseChangeLog:
       file: db/changelog/changeset/2025/03/22/create-science-interest-table.sql
   - include:
       file: db/changelog/changeset/2025/03/22/create-scientific-work.sql
+  - include:
+      file: db/changelog/changeset/2025/03/25/add-active-column-to-elective.sql

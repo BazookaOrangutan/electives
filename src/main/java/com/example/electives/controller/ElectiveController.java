@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Tag(name = "Elective Controller", description = "Контроллер для управления элективами")
@@ -57,4 +58,13 @@ public interface ElectiveController {
                                           @RequestParam String author,
                                           @Parameter(description = "Название электива", required = true)
                                           @RequestParam String elective);
+
+    @PatchMapping("{id}/active")
+    @Operation(summary = "Изменение активности электива", description = "Позволяет выбрать активен ли в данный момент электив или нет ")
+    void updateElectiveActiveStatus(@Parameter(description = "Уникальный идентификатор электива", required = true)
+                                    @PathVariable UUID id,
+                                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                            description = "JSON вида {active : true/false}",
+                                            required = true
+                                    ) @RequestBody Map<String, Boolean> status);
 }

@@ -18,4 +18,6 @@ public interface ElectiveService {
     void deleteElective(UUID id);
 
     List<Elective> getAllElectivesByAuthorAndName(String author, String name);
+
+    void updateActiveStatus(UUID id, Boolean active);
 }

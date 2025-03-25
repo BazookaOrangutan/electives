@@ -21,6 +21,7 @@ public class Elective {
     private String controlType;
     private String format;
     private String intensity;
+    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
