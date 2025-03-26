@@ -1,8 +1,10 @@
 package com.example.electives.service.impl;
 
 import com.example.electives.exception.LecturerNotFoundException;
+import com.example.electives.model.Elective;
 import com.example.electives.model.Lecturer;
 import com.example.electives.repository.*;
+import com.example.electives.service.ElectiveService;
 import com.example.electives.service.LecturerService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class LecturerServiceImpl implements LecturerService {
     private final ScientificWorkRepository scientificWorkRepository;
 
     private final ElectiveRepository electiveRepository;
+    private final ElectiveService electiveService;
 
     private void deleteOldInformationForLecturer(UUID lecturerId) {
 
@@ -90,5 +93,7 @@ public class LecturerServiceImpl implements LecturerService {
         electiveRepository.deleteAllByAuthorId(id);
 
         lecturerRepository.deleteById(id);
+
+        electiveService.reorderElectives(electiveRepository.findAll().stream().map(Elective::getId).toList());
     }
 }

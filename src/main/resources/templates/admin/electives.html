@@ -28,7 +28,19 @@
         .btn-custom {
             margin-right: 5px;
         }
+        .drag-handle {
+            cursor: move;
+            width: 30px;
+        }
+        .table tbody tr {
+            user-select: none;
+        }
+        .table tbody tr.sortable-chosen {
+            background-color: #f8f9fa;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
 <body>
 <!-- Навигационная панель -->
@@ -49,9 +61,10 @@
     </a>
 
     <!-- Таблица с элективами -->
-    <table class="table table-bordered table-striped table-hover table-custom">
+    <table class="table table-bordered table-striped table-hover table-custom" id="electivesTable">
         <thead class="thead-light">
         <tr>
+            <th>#</th>
             <th>ID</th>
             <th>Название</th>
             <th>Описание</th>
@@ -65,7 +78,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="elective : ${electives}">
+        <tr th:each="elective : ${electives}" th:data-id="${elective.id}">
+            <td class="drag-handle"><i class="fas fa-arrows-alt"></i></td>
             <td th:text="${elective.id}"></td>
             <td th:text="${elective.title}"></td>
             <td th:text="${elective.description}"></td>
@@ -142,7 +156,37 @@
                     });
             });
         });
+
+        const electivesTable = document.getElementById('electivesTable');
+        if (electivesTable) { // Проверяем, существует ли таблица на странице
+            new Sortable(electivesTable.querySelector('tbody'), {
+                animation: 150,
+                handle: '.drag-handle',
+                onEnd: function() {
+                    const rows = electivesTable.querySelectorAll('tbody tr');
+                    const newOrder = Array.from(rows).map(row => row.getAttribute('data-id'));
+
+                    fetch('/api/v1/electives/reorder', {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(newOrder)
+                    }).then(response => {
+                        if (!response.ok) {
+                            alert('Ошибка при сохранении порядка');
+                            window.location.reload();
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Не удалось сохранить порядок');
+                    });
+                }
+            });
+        }
     });
+
+
 </script>
 </body>
 </html>

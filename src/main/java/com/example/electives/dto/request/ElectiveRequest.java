@@ -29,6 +29,9 @@ public class ElectiveRequest {
     @Schema(description = "Активен на данный момент ли электив", example = "true")
     private Boolean active;
 
+    @Schema(description = "Порядковый номер электива на странице", example = "2")
+    private Integer sortOrder;
+
     @Schema(description = "Уникальный идетификатор автора электива", example = "165abbd4-de3e-47f3-8429-938559e3586a")
     private UUID authorId;
 }

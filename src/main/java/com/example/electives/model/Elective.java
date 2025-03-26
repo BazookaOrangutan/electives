@@ -22,6 +22,7 @@ public class Elective {
     private String format;
     private String intensity;
     private Boolean active;
+    private Integer sortOrder;
 
     @ManyToOne
     @JoinColumn(name = "author_id")

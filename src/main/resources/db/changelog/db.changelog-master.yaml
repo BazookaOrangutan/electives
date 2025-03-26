@@ -23,3 +23,5 @@ databaseChangeLog:
       file: db/changelog/changeset/2025/03/25/add-active-column-to-elective.sql
   - include:
       file: db/changelog/changeset/2025/03/25/alter-text-fields.sql
+  - include:
+      file: db/changelog/changeset/2025/03/26/add-sort_order-to-elective-table.sql

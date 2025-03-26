@@ -32,6 +32,9 @@ public class ElectiveResponse {
     @Schema(description = "Активен на данный момент ли электив", example = "true")
     private Boolean active;
 
+    @Schema(description = "Порядковый номер электива на странице", example = "2")
+    private Integer sortOrder;
+
     @Schema(description = "Автор(преподаватель) электива в виде объекта")
     private LecturerResponse lecturer;
 }

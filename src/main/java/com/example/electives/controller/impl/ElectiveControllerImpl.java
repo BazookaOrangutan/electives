@@ -110,4 +110,9 @@ public class ElectiveControllerImpl implements ElectiveController {
         Boolean active = request.get("active");
         electiveService.updateActiveStatus(id, active);
     }
+
+    @Override
+    public void reorderElectives(List<UUID> newOrder) {
+        electiveService.reorderElectives(newOrder);
+    }
 }

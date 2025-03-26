@@ -17,4 +17,9 @@ public interface ElectiveRepository extends JpaRepository<Elective, UUID> {
     void deleteAllByAuthorId(UUID authorId);
 
     boolean existsByAuthorId(UUID authorId);
+
+    List<Elective> findAllByOrderBySortOrderAsc();
+
+    @Query("SELECT MAX(e.sortOrder) FROM Elective e")
+    Integer findMaxSortOrder();
 }
