@@ -72,7 +72,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://172.17.192.1:8081", "http://172.20.64.1:8081")); // Укажите здесь адрес вашего фронтенда
+        configuration.setAllowedOrigins(List.of("http://172.17.192.1:8081", "http://172.20.64.1:8081",
+                "http://electives.t-university.exfl.ru"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
