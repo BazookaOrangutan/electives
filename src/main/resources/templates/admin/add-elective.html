@@ -54,7 +54,7 @@
 
         <!-- Поле: Тип контроля -->
         <div class="mb-3">
-            <label for="controlType" class="form-label">Тип контроля</label>
+            <label for="controlType" class="form-label">Вид контроля</label>
             <input type="text" class="form-control" id="controlType" th:field="*{controlType}" required>
         </div>
 
@@ -66,7 +66,7 @@
 
         <!-- Поле: Интенсивность -->
         <div class="mb-3">
-            <label for="intensity" class="form-label">Интенсивность</label>
+            <label for="intensity" class="form-label">Трудоёмкость, ЗЕ</label>
             <input type="text" class="form-control" id="intensity" th:field="*{intensity}" required>
         </div>
 
@@ -96,6 +96,7 @@
             format: document.getElementById('format').value,
             intensity: document.getElementById('intensity').value,
             authorId: document.getElementById('authorId').value,
+            active: true
         };
 
         // Отправляем данные на сервер
