@@ -51,7 +51,7 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder().encode("adminPassword"))
+                .password(passwordEncoder().encode("el280adm3"))
                 .roles("ADMIN", "USER")
                 .build();
 
@@ -72,8 +72,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://172.17.192.1:8081", "http://172.20.64.1:8081",
-                "http://electives.t-university.exfl.ru"));
+        configuration.setAllowedOrigins(List.of(
+                "https://electives.t-university.exfl.ru"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

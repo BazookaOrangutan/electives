@@ -19,5 +19,6 @@ public class ScientificWork {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(length = 999999999)
     private String description;
 }

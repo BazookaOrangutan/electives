@@ -39,6 +39,20 @@
             background-color: #f8f9fa;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+        .table tbody td {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table tbody td.description-cell {
+            white-space: normal; /* разрешаем перенос строк */
+            max-height: 60px; /* ограничиваем высоту */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* количество строк */
+            -webkit-box-orient: vertical;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
@@ -80,7 +94,7 @@
         <tbody>
         <tr th:each="elective : ${electives}" th:data-id="${elective.id}">
             <td class="drag-handle"><i class="fas fa-arrows-alt"></i></td>
-            <td th:text="${elective.id}"></td>
+            <td class="description-cell" th:text="${elective.id}"></td>
             <td th:text="${elective.title}"></td>
             <td th:text="${elective.description}"></td>
             <td th:text="${elective.place}"></td>

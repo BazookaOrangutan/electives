@@ -57,12 +57,12 @@
         </div>
 
         <div class="mb-3">
-            <label for="experience" class="form-label">Опыт</label>
+            <label for="experience" class="form-label">Опыт, лет</label>
             <input type="number" class="form-control" id="experience" required>
         </div>
 
         <div class="mb-3">
-            <label for="specialtyExperience" class="form-label">Опыт по специальности</label>
+            <label for="specialtyExperience" class="form-label">Опыт по специальности, лет</label>
             <input type="number" class="form-control" id="specialtyExperience" required>
         </div>
 
@@ -216,7 +216,8 @@
                     alert('Lecturer created successfully');
                     window.location.href = '/admin/lecturers'; // Перенаправление после успешного создания
                 } else {
-                    alert('Error creating lecturer');
+                    alert('Error creating lecturer' + response.text());
+                    console.log(response)
                 }
             })
             .catch(error => {

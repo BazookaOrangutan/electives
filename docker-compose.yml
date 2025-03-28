@@ -4,7 +4,7 @@ services:
     container_name: postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: i2ioKSN829smn921
       POSTGRES_DB: electives
     ports:
       - "5432:5432"
@@ -21,8 +21,8 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/electives
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL-AUTO: update
+      SPRING_DATASOURCE_PASSWORD: i2ioKSN829smn921
+      SPRING_JPA_HIBERNATE_DDL-AUTO: validate
     ports:
       - "8080:8080"
     depends_on:
