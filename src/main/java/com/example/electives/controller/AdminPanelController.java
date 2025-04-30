@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,10 +44,9 @@ public class AdminPanelController {
 
     @GetMapping("/electives/new")
     public String showElectiveCreateForm(Model model) {
-        // Передаем пустой объект ElectiveRequest в форму
+
         model.addAttribute("electiveRequest", new ElectiveRequest());
 
-        // Получаем список лекторов и передаем его в форму
         List<Lecturer> lecturers = lecturerService.getAllLecturers();
         model.addAttribute("lecturers", lecturers);
 
@@ -72,7 +68,7 @@ public class AdminPanelController {
     @GetMapping("/lecturers/delete/{id}")
     public String deleteLecturer(@PathVariable UUID id, Model model) {
 
-        if(lecturerService.hasElectives(id)){
+        if (lecturerService.hasElectives(id)) {
             model.addAttribute("hasElectives", true);
             model.addAttribute("lecturerId", id);
             return "admin/confirm-delete";

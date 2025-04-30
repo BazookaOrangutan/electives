@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Edit Lecturer</title>
-  <!-- Подключение Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Подключение FontAwesome для иконок -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
     .btn-back {
@@ -37,7 +35,6 @@
 
     <input type="hidden" id="lecturerId" th:value="${lecturer.id}">
 
-    <!-- Основные поля -->
     <div class="mb-3">
       <label for="name" class="form-label">ФИО</label>
       <input type="text" class="form-control" id="name" th:field="*{name}" required>
@@ -90,7 +87,6 @@
       <input type="text" class="form-control" id="address" th:field="*{address}" required>
     </div>
 
-    <!-- Динамические поля для списков -->
     <div class="mb-3">
       <label class="form-label">Высшее образовние</label>
       <div id="educationsContainer">
@@ -102,8 +98,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('educationsContainer', 'educations')">+ Добавить</button>
     </div>
 
-
-    <!-- jobTitles -->
     <div class="mb-3">
       <label class="form-label">Должности</label>
       <div id="jobTitlesContainer">
@@ -115,7 +109,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('jobTitlesContainer', 'jobTitles')">+ Добавить</button>
     </div>
 
-    <!-- jobsInUniversity -->
     <div class="mb-3">
       <label class="form-label">Работа в университете</label>
       <div id="jobsInUniversityContainer">
@@ -127,7 +120,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('jobsInUniversityContainer', 'jobsInUniversity')">+ Добавить</button>
     </div>
 
-    <!-- disciplines -->
     <div class="mb-3">
       <label class="form-label">Преподаваемые дисциплины</label>
       <div id="disciplinesContainer">
@@ -139,7 +131,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('disciplinesContainer', 'disciplines')">+ Добавить</button>
     </div>
 
-    <!-- profTrainings -->
     <div class="mb-3">
       <label class="form-label">Данные о повышении квалификации и (или) о профессиональной подготовке</label>
       <div id="profTrainingsContainer">
@@ -151,7 +142,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('profTrainingsContainer', 'profTrainings')">+ Добавить</button>
     </div>
 
-    <!-- scienceInterests -->
     <div class="mb-3">
       <label class="form-label">Научные интересы</label>
       <div id="scienceInterestsContainer">
@@ -163,7 +153,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('scienceInterestsContainer', 'scienceInterests')">+ Добавить</button>
     </div>
 
-    <!-- profExperience -->
     <div class="mb-3">
       <label class="form-label">Профессиональный опыт</label>
       <div id="profExperienceContainer">
@@ -175,7 +164,6 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('profExperienceContainer', 'profExperience')">+ Добавить</button>
     </div>
 
-    <!-- scientificWorks -->
     <div class="mb-3">
       <label class="form-label">Научные работы и публикации</label>
       <div id="scientificWorksContainer">
@@ -187,15 +175,12 @@
       <button type="button" class="btn btn-success btn-sm" onclick="addField('scientificWorksContainer', 'scientificWorks')">+ Добавить</button>
     </div>
 
-    <!-- Кнопка отправки формы -->
     <button style="margin: 20px 0" type="submit" class="btn btn-primary" onclick="submitForm(event)">Изменить данные</button>
   </form>
 </div>
 
-<!-- Подключение Bootstrap JS и Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Функция для добавления нового поля
   function addField(containerId, fieldName) {
     const container = document.getElementById(containerId);
     const newField = document.createElement('div');
@@ -207,7 +192,6 @@
     container.appendChild(newField);
   }
 
-  // Функция для удаления поля
   function removeField(button) {
     button.parentElement.remove();
   }
@@ -237,7 +221,6 @@
       photo: document.getElementById('photoBase64').value, // Фото в Base64
     };
 
-    // Отправляем данные на сервер
     fetch(`https://electives.t-university.exfl.ru/admin/lecturers/update/${lecturerId}`, {
       method: 'POST',
       headers: {

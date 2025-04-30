@@ -82,30 +82,5 @@ public interface LecturerMapper {
                         .stream().map(el -> ScientificWork.builder().description(el).build())
                         .toList())
                 .build();
-    };
-
-//    @AfterMapping
-//    default void setLecturerFields(@MappingTarget Lecturer lecturer, LecturerRequest lecturerRequest) {
-//        lecturer.setDisciplines(lecturerRequest.getDisciplines().stream().map(el -> Discipline.builder().name(el).build()).toList());
-//        lecturer.setEducations(lecturerRequest.getEducations().stream().map(el -> Education.builder().description(el).build()).toList());
-//        lecturer.setJobsInUniversity(lecturerRequest.getJobsInUniversity().stream().map(el -> JobInUniversity.builder().description(el).build()).toList());
-//        lecturer.setJobTitles(lecturerRequest.getJobTitles().stream().map(el -> JobTitle.builder().title(el).build()).toList());
-//        lecturer.setProfExperience(lecturerRequest.getProfExperience().stream().map(el -> ProfExperience.builder().description(el).build()).toList());
-//        lecturer.setProfTrainings(lecturerRequest.getProfTrainings().stream().map(el -> ProfTraining.builder().description(el).build()).toList());
-//        lecturer.setScienceInterests(lecturerRequest.getScienceInterests().stream().map(el -> ScienceInterest.builder().name(el).build()).toList());
-//        lecturer.setScientificWorks(lecturerRequest.getScientificWorks().stream().map(el -> ScientificWork.builder().description(el).build()).toList());
-//    }
-
-//    @BeforeMapping
-//    default void setResponseFields(@MappingTarget LecturerResponse lecturerResponse, Lecturer lecturer) {
-
-//        lecturerResponse.setDisciplines(lecturer.getDisciplines().stream().map(Discipline::getName).toList());
-//        lecturerResponse.setEducations(lecturer.getEducations().stream().map(Education::getDescription).toList());
-//        lecturerResponse.setJobsInUniversity(lecturer.getJobsInUniversity().stream().map(JobInUniversity::getDescription).toList());
-//        lecturerResponse.setJobTitles(lecturer.getJobTitles().stream().map(JobTitle::getTitle).toList());
-//        lecturerResponse.setProfExperience(lecturer.getProfExperience().stream().map(ProfExperience::getDescription).toList());
-//        lecturerResponse.setProfTrainings(lecturer.getProfTrainings().stream().map(ProfTraining::getDescription).toList());
-//        lecturerResponse.setScienceInterests(lecturer.getScienceInterests().stream().map(ScienceInterest::getName).toList());
-//        lecturerResponse.setScientificWorks(lecturer.getScientificWorks().stream().map(ScientificWork::getDescription).toList());
-//    }
+    }
 }
